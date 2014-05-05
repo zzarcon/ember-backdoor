@@ -5,7 +5,7 @@
     return exports.Backdoor().templates.contains(templateName);
   };
 
-  exports.Backdoor = function() {
+  exports.Backdoor = function(app) {
     var controller = function(name) {
       return lookup('controller:' + name);
     };
@@ -18,7 +18,7 @@
     var recognizes = function(path) {
       return App.Router.router.recognizer.recognize(path);
     };
-    var App = exports.App;
+    var App = app || exports.App;
     var container = App.__container__;
     var lookup = container.lookup.bind(container);
     var store = lookup("store:main");
