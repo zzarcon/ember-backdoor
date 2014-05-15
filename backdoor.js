@@ -45,10 +45,7 @@
         },
         after: function(name, end, payload, start){
           var duration = Math.round(end - start);
-          var template = payload.template;
-          if (template){ // this is to filter out anonymous templates
-            console.log('rendered', template, 'took', duration, 'ms');
-          }
+          console.log('rendered', payload.object, 'took', duration, 'ms');
         }
       });
     };
