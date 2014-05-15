@@ -31,7 +31,7 @@
     //Show transition routes in the console
     //
     var logAll = function () {
-      exports.App.reopen({
+      App.reopen({
         LOG_TRANSITIONS: true,
         LOG_TRANSITIONS_INTERNAL: true,
         LOG_VIEW_LOOKUPS: true,
