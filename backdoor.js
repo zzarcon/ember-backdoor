@@ -45,7 +45,7 @@
         },
         after: function(name, end, payload, start){
           var duration = Math.round(end - start);
-          console.log('rendered', payload.object, 'took', duration, 'ms');
+          console.log('rendered ' + payload.object + ' ' + duration + ' ms');
         }
       });
     };
