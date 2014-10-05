@@ -5,7 +5,28 @@
     return exports.Backdoor().templates.contains(templateName);
   };
 
+  /**
+   * Return the current Ember app defined in the global scope, or the default app
+   * @param  {Object} defaultApp Ember app passed as param
+   * @return {Ember.Application}
+   */
+  var getApp = function(defaultApp) {
+    var app = defaultApp || exports.App;
+
+    if (!app) {
+      for (var i in window) {
+        if (window.hasOwnProperty(i) && window[i] instanceof Ember.Application) {
+          app = window[i];
+        }
+      }
+    }
+
+    return app;
+  };
+
   exports.Backdoor = function(app) {
+    var App = getApp(app);
+
     var controller = function(name) {
       return lookup('controller:' + name);
     };
@@ -18,11 +39,10 @@
     var recognizes = function(path) {
       return App.Router.router.recognizer.recognize(path);
     };
-    var App = app || exports.App;
     var container = App.__container__;
     var lookup = container.lookup.bind(container);
     var store = lookup("store:main");
-    var allRoutes = Em.keys(App.Router.router.recognizer.names);
+    var allRoutes = App.Router.router ? Em.keys(App.Router.router.recognizer.names) : [];
     var appController = controller("application");
     var currentPath = appController.get("currentPath");
     var currentRouteName = appController.get("currentRouteName");
