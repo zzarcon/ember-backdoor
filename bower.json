@@ -1,0 +1,10 @@
+{
+  "name": "ember-backdoor",
+  "version": "0.1.1",
+  "main": [
+    "./backdoor.js"
+  ],
+  "dependencies": {
+    "ember": "*"
+  }
+}
